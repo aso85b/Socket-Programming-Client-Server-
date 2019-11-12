@@ -33,14 +33,20 @@ print(client_name + ' has connected.')
 print('Press \'bye\' to leave chat!')
 #send a message to the client
 connection.send(name.encode())
+f= open("textfile1.txt","w+")
 while True:
    message = input('Me > ')
    if message == 'bye':
       message = 'Have a nice day, bye.'
       connection.send(message.encode())
+      f.write("ser:  "+message)
       print('\n')
       break
    connection.send(message.encode())
+   f.write("ser:  "+message+"\n")
    message = connection.recv(1024)
    message = message.decode()
    print(client_name, '>', message)
+   f.write("clt:  "+message+"\n")
+
+f.close()
